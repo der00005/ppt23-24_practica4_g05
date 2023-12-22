@@ -24,8 +24,8 @@ import java.util.logging.Logger;
  * Autor: Juan Carlos Cuevas Mart�nez
  *
  ******************************************************
- * Alumno 1:
- * Alumno 2:
+ * Alumno 1: David Elbal Ruiz
+ * Alumno 2: Francisco Sánchez Orozco
  *
  ******************************************************/
 public class MainServer {
