@@ -50,9 +50,10 @@ public HttpConnection(Socket s) {
                     String line = bis.readLine();//linea de peticion
                     String partes[] = line.split(" ");
                     if (partes.length == 3) {
+                          System.out.println("Cabecera host:[" +partes[1]+"]: ");
                         if (partes[0].compareToIgnoreCase("get") == 0) {
                             while (!(line = bis.readLine()).equals("") && line != null) {
-                                System.out.println("Le�do[" + line.length() + "]: " + line);
+                                System.out.println("Leido[" + line.length() + "]: " + line);
                                 //buscar cabecera host
                                 //dos.write(("ECO " + line + "\r\n").getBytes());
                                 //dos.flush();

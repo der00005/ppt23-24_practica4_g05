@@ -1,0 +1,7 @@
+h1 {
+    /* Establece la fuente como Comic Sans MS */
+    font-family: 'Comic Sans MS', cursive;
+    /* Puedes agregar estilos adicionales si lo deseas, por ejemplo, cambiar el color o tamaño del texto */
+    color: #333; /* Color del texto, puedes cambiarlo según tus preferencias */
+    font-size: 2em; /* Tamaño del texto, puedes ajustarlo según tus preferencias */
+  }
