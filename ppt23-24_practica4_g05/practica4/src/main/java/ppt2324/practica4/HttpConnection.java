@@ -47,8 +47,9 @@ public HttpConnection(Socket s) {
 			dos.flush();
 			BufferedReader bis = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-                    String line = bis.readLine();//linea de peticion
+                    String line = bis.readLine();//linea de peticion -> GET Ruta HTTP1.1
                     String partes[] = line.split(" ");
+                    //partes[1]="192.168.1.10";
                     if (partes.length == 3) {
                           System.out.println("Cabecera host:[" +partes[1]+"]: ");
                         if (partes[0].compareToIgnoreCase("get") == 0) {
@@ -65,15 +66,15 @@ public HttpConnection(Socket s) {
                             if(data == null){
                                 
                             }else{
-                            dos.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
+                            dos.write("HTTP/1.1 200 OK\r\n".getBytes());
+                            dos.write(("Method: "+partes[0]+"\r\n").getBytes());
                             dos.write(("Content_Type:"+getContentType(partes[1])+"\r\n").getBytes());
-                            dos.write(("Content_Length:"+data.length+"\r\n\r\n").getBytes());
+                            dos.write(("Content_Length:"+data.length+"\r\n").getBytes());
+                            dos.write("\r\n".getBytes()); //Fin de cabeceras;
                             dos.flush();
-                            dos.write("<html><body><h1>HOLA</h1></body></html>".getBytes());
                             dos.write(data);
-                            dos.flush();
                             }
-                        } else {
+                        } else { //Se pone doble \r\n para el fin de cabeceras
                             dos.write("HTTP/1.1 405 Method not allowed\r\n\r\n".getBytes());
                             dos.flush();
                         }
@@ -112,9 +113,10 @@ public HttpConnection(Socket s) {
     protected byte[] readFile(String path) throws FileNotFoundException,IOException{
         File f=new File("."+path);//donde metes la pagina es donde esta la carpeta de www y nsq mas de la practica
         FileInputStream fis=new FileInputStream(f);
-        byte []datos=new byte[(int)f.length()];
+        byte []datos = new byte[(int)f.length()];
         fis.read(datos);
-        return datos;
+        System.out.println("Host:"+ socket.getLocalAddress());
+        return (datos);
         // return ("<html><body><h1>Hola "+path+"</h1></body></html>").getBytes();
     }
     protected String getContentType(String path){
@@ -129,10 +131,10 @@ public HttpConnection(Socket s) {
                     if(n.length>=2){
                         return ("application/"+n[n.length-1]);
                         
+                    }else{
+                        return "ns";
                     }
-                }
-        return "";
-                
+           }  
         }
 
 }
